@@ -2,7 +2,7 @@ const path = require("path");
 const executeCpp = require("./compilers/cppCompiler/cppCompiler");
 const executeJava = require("./compilers/javaCompiler/javacompiler");
 const executeJavascript = require("./compilers/jsCompiler/jscompiler");
-const executePython = require("./compilers/pyCompiler/pythonCompiler");
+const { executePython } = require("./compilers/pyCompiler/pythonCompiler");
 const fs = require("fs");
 const { v4: uuid } = require("uuid");
 const output="output";
@@ -41,6 +41,17 @@ let pythoncompiler = async () => {
   const output = await executePython(filepath);
   console.log(output);
 };
-pythoncompiler();
+// pythoncompiler();
 
+const runPython = async () => {
+  try {
+    const filepath = await generateFile();
+    console.log("Python Filepath:", filepath);
+    const output = await executePython(filepath);
+    console.log("Python Output:", output);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
 
+runPython();

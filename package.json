@@ -1,0 +1,41 @@
+{
+  "name": "ve_compiler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run compiler"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/viditpandey06/VE_Compiler.git"
+  },
+  "keywords": [
+    "compiler",
+    "windows",
+    "shell",
+    "online",
+    "compiler",
+    "node.js",
+    "java-compiler",
+    "python-Compiler",
+    "Js-compiler",
+    "c++-compiler",
+    "java",
+    "python",
+    "javascript",
+    "c++"
+  ],
+    "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.3",
+    "nanoid": "^5.0.6",
+    "uuid": "^9.0.1"
+  },
+  "author": "Vidit Pandey, Eshan Singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/viditpandey06/VE_Compiler/issues"
+  },
+  "homepage": "https://github.com/viditpandey06/VE_Compiler#readme"
+}

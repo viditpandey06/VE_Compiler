@@ -18,6 +18,7 @@ const generateFile =(language, code) => {
     const filename = `${jobId}.cpp`;
     const filepath =   path.join(dirCodes, filename);
     fs.writeFileSync(filepath, code);
+    executeCpp(filepath);
     
   } else if (language === "java") {
     const filename = `${jobId}.java`;
@@ -41,16 +42,3 @@ let cppcompiler = async () => {
   const output = await executeCpp(filepath);
   console.log(output);
 };
-
-// let javacompiler = async (filepath) => {
-//   const output = await executeJava(filepath);
-//   console.log(output);
-// };
-// let jscompiler = async () => {
-//   const output = await executeJavascript(filepath);
-//   console.log(output);
-// };
-// let pythoncompiler = async () => {
-//   const output = await executePython(filepath);
-//   console.log(output);
-// };

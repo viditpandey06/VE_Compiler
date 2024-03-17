@@ -29,7 +29,7 @@ let cppcompiler = async () => {
   console.log(output);
 };
 
-let javacompiler = async () => {
+let javacompiler = async (filepath) => {
   const output = await executeJava(filepath);
   console.log(output);
 };
@@ -54,4 +54,5 @@ const runPython = async () => {
   }
 };
 
-runPython();
+//runPython();
+javacompiler('C:\\Users\\vidit\\Desktop\\VE_Compiler\\codes\\p1.java');

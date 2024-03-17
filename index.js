@@ -1,6 +1,6 @@
 const path = require("path");
 const executeCpp = require("./compilers/cppCompiler/cppCompiler");
-const executeJava = require("./compilers/javaCompiler/javacompiler");
+const {executeJava} = require("./compilers/javaCompiler/javacompiler");
 const executeJavascript = require("./compilers/jsCompiler/jscompiler");
 const { executePython } = require("./compilers/pyCompiler/pythonCompiler");
 const fs = require("fs");

@@ -13,14 +13,14 @@ if (!fs.existsSync(dirCodes)) {
   fs.mkdirSync(dirCodes, { recursive: true });
 }
 
-function getISTDateTimeString() {
-  const dateIST = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
-  return dateIST.replace(', ', '-').replace(/\//g, '-').replace(/:/g, '.');
-}
+// function getISTDateTimeString() {
+//   const dateIST = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
+//   return dateIST.replace(', ', '-').replace(/\//g, '-').replace(/:/g, '.');
+// }
 
 
 const generateFile =(language, code) => {
-  const jobId = getISTDateTimeString();
+  const jobId = uuid();
   if (language === "cpp") {
     const filename = `${jobId}.cpp`;
     const filepath =   path.join(dirCodes, filename);

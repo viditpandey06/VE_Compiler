@@ -2,7 +2,7 @@ const { exec } = require("child_process");
 const fs = require("fs");
 const path = require("path");
 const outputPath='';
-let output=()=>{
+var output=()=>{
 outputPath = path.join(__dirname, "outputs");
 console.log(outputPath);
 if (!fs.existsSync(outputPath)) {

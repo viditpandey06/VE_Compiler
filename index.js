@@ -13,11 +13,6 @@ if (!fs.existsSync(dirCodes)) {
   fs.mkdirSync(dirCodes, { recursive: true });
 }
 
-// function getISTDateTimeString() {
-//   const dateIST = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
-//   return dateIST.replace(', ', '-').replace(/\//g, '-').replace(/:/g, '.');
-// }
-
 
 const generateFile =(language, code) => {
   const jobId = uuid();

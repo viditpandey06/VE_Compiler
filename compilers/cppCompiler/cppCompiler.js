@@ -2,37 +2,35 @@ const { exec } = require("child_process");
 const fs = require("fs");
 const path = require("path");
 
+const executeCpp = async (filepath) => {
+  try {
+    const jobId = path.basename(filepath).split(".")[0];
+    const codebasePath = path.join(__dirname, "../../codebase");
+    const outFilePath = path.join(codebasePath, `${jobId}.out`);
 
-  const executeCpp = (filepath) => {
-  const jobId = path.basename(filepath).split(".")[0];
-  //const outPath = path.join(outputPath, `${jobId}.out`);
-
-  // return new Promise((resolve, reject) => {
-  //   exec(
-  //     `g++ ${filepath} -o ${filepath}; ./${jobId}.out`,
-  //     (error, stdout, stderr) => {
-  //       error && reject({ error, stderr });
-  //       stderr && reject(stderr);
-  //       resolve(stdout);
-  //     }
-  //   );
-  // });
-  async function executeCpp(filepath, jobId) {
-    try {
-      const command = `g++ ${filepath} -o ${filepath}; ./${jobId}.out`;
-      const { stdout, stderr } = await exec(command);
-
-      if (stderr) {
-        throw new Error(`Compilation or execution error:\n${stderr}`);
-      }
-
-      return stdout;
-    } catch (error) {
-      reject({ error, stderr }); // Assuming 'reject' is available in the context
+    if (!fs.existsSync(codebasePath)) {
+      fs.mkdirSync(codebasePath, { recursive: true });
     }
-  }
 
-  
+    const compilationCommand = `g++ ${filepath} -o ${outFilePath}`;
+    await execPromise(compilationCommand);
+
+    return outFilePath;
+  } catch (error) {
+    throw new Error(`Compilation error: ${error}`);
+  }
+};
+
+const execPromise = (command) => {
+  return new Promise((resolve, reject) => {
+    exec(command, (error, stdout, stderr) => {
+      if (error) {
+        reject(error);
+        return;
+      }
+      resolve({ stdout, stderr });
+    });
+  });
 };
 
 module.exports = {

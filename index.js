@@ -41,6 +41,6 @@ const generateFile =(language, code) => {
 generateFile("cpp", "#include <iostream>\n using namespace std;\nint main() {\n  cout << \"Hello, World!\";\n  return 0;\n}");
 
 let cppcompiler = async () => {
-  const output = await executeCpp(filepath);
+  const output = await executepp(filepath);
   console.log(output);
 };

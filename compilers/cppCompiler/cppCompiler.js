@@ -1,5 +1,4 @@
 const { exec } = require("child_process");
-const { log } = require("console");
 const fs = require("fs");
 const path = require("path");
 
@@ -13,12 +12,16 @@ const executeCpp = async (filepath) => {
       fs.mkdirSync(codebasePath, { recursive: true });
     }
 
-    const compilationCommand = `g++ ${filepath} -o ${outFilePath}; ./${filepath}`;
+    const compilationCommand = `g++ ${filepath} -o ${outFilePath}`;
     await execPromise(compilationCommand);
+
+    const executionCommand = `${outFilePath}`;
+    const { stdout, stderr } = await execPromise(executionCommand);
+    console.log(stdout);
 
     return outFilePath;
   } catch (error) {
-    throw new Error(`Compilation error: ${error}`);
+    throw new Error(`Compilation or execution error: ${error}`);
   }
 };
 
@@ -26,11 +29,10 @@ const execPromise = (command) => {
   return new Promise((resolve, reject) => {
     exec(command, (error, stdout, stderr) => {
       if (error) {
-        console.log(error);
+        console.error(error);
         reject(error);
         return;
       }
-      console.log(stdout);
       resolve({ stdout, stderr });
     });
   });

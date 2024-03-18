@@ -22,7 +22,7 @@ const generateFile = async (language, code) => {
     fs.writeFileSync(filepath, code);
     executeCpp(filepath);
   } else if (language === "java") {
-    jobId = "Myclass1";
+    jobId = "Main";
     const filename = `${jobId}.java`;
     const filepath = path.join(dirCodes, filename);
     fs.writeFileSync(filepath, code);
@@ -54,7 +54,7 @@ generateFile(
 );
 generateFile(
   "java",
-  'public class Myclass1 {\n  public static void main(String[] args) {\n    System.out.println("Hello, World");\n  }\n}'
+  'public class Main {\n  public static void main(String[] args) {\n    System.out.println("Hello, World");\n  }\n}'
 );
 generateFile("js", "console.log('Hello, World! js');");
 generateFile("py", 'print("Hello, World1111ps")');

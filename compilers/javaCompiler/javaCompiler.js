@@ -1,34 +1,48 @@
-/* These lines of code are importing necessary modules in Node.js for executing shell commands, working
-with the file system, and handling file paths. Here's what each import statement does: */
 const { exec } = require("child_process");
+const { log } = require("console");
 const fs = require("fs");
 const path = require("path");
 
-const executeJava = (filepath) => {
-  /* The code block you provided is setting up an output directory path for storing output files. Here's
-a breakdown of what it does: */
-  const outputPath = path.join(__dirname, "outputs");
-  console.log(outputPath);
-  if (!fs.existsSync(outputPath)) {
-    fs.mkdirSync(outputPath, { recursive: true });
+const executeJava = async (filepath) => {
+  try {
+    const jobId = "Myclass1"; //path.basename(filepath).split(".")[0];
+    const codebasePath = path.join(__dirname, "../../codebase");
+    console.log("CodebasePath:", codebasePath);
+    const outFilePath = path.join(codebasePath, `${jobId}`);
+    console.log("OutFilePath:", outFilePath);
+    if (!fs.existsSync(codebasePath)) {
+      fs.mkdirSync(codebasePath, { recursive: true });
+    }
+    
+    const compilationCommand = `javac ${filepath} `;
+
+    await execPromise(compilationCommand);
+
+    const executionCommand = `java ${jobId}`;
+    const { stdout, stderr } = await execPromise(executionCommand);
+    console.log(stdout);
+
+    return outFilePath;
+  } catch (error) {
+    
+    console.log("Error", error);
   }
+};
 
-  const jobId = path.basename(filepath).split(".")[0];
-  const outPath = path.join(outputPath, `${jobId}.out`);
-
+const execPromise = (command) => {
   return new Promise((resolve, reject) => {
-    // Compile and execute Java code with javac and java:
-    exec(
-      `javac ${filepath} -d ${outputPath} && cd ${outputPath} && java ${jobId}`,
-      (error, stdout, stderr) => {
-        error && reject({ error, stderr });
-        stderr && reject(stderr);
-        resolve(stdout);
+    exec(command, (error, stdout, stderr) => {
+      if (error) {
+        console.error(error);
+        reject(error);
+        return;
       }
-    );
+      resolve({ stdout, stderr });
+    });
   });
 };
 
+
 module.exports = {
-  executeJava
+  executeJava,
 };

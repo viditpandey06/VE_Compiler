@@ -15,10 +15,10 @@ const executeJava = async (filepath) => {
     }
     
     const compilationCommand = `javac ${filepath} `;
-
+    
     await execPromise(compilationCommand);
 
-    const executionCommand = `java ${jobId}`;
+    const executionCommand = `java -cp ${codebasePath} ${jobId}`;
     const { stdout, stderr } = await execPromise(executionCommand);
     console.log(stdout);
 

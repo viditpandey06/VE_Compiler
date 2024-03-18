@@ -6,13 +6,15 @@ const executeCpp = async (filepath) => {
   try {
     const jobId = path.basename(filepath).split(".")[0];
     const codebasePath = path.join(__dirname, "../../codebase");
+    console.log("CodebasePath:", codebasePath);
     const outFilePath = path.join(codebasePath, `${jobId}.out`);
-
+    console.log("OutFilePath:", outFilePath);
     if (!fs.existsSync(codebasePath)) {
       fs.mkdirSync(codebasePath, { recursive: true });
     }
 
     const compilationCommand = `g++ ${filepath} -o ${outFilePath}`;
+    console.log(filepath);
     await execPromise(compilationCommand);
 
     const executionCommand = `${outFilePath}`;

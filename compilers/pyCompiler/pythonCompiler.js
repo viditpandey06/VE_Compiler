@@ -1,25 +1,38 @@
 const { exec } = require("child_process");
 const fs = require("fs");
 const path = require("path");
-const outputPath='';
-var output=()=>{
-outputPath = path.join(__dirname, "outputs");
-console.log(outputPath);
-if (!fs.existsSync(outputPath)) {
-  fs.mkdirSync(outputPath, { recursive: true });
-}};
-const executePython = (filepath) => {
-  output();
-  const jobId = path.basename(filepath).split(".")[0];
-  const outPath = path.join(outputPath, `${jobId}.out`);
 
+const executePython = async (filepath) => {
+  try {
+    const jobId = path.basename(filepath).split(".")[0];
+    const codebasePath = path.join(__dirname, "../../codebase");
+    console.log("CodebasePath:", codebasePath);
+    const outFilePath = path.join(codebasePath, `${jobId}.out`);
+    console.log("OutFilePath:", outFilePath);
+    if (!fs.existsSync(codebasePath)) {
+      fs.mkdirSync(codebasePath, { recursive: true });
+    }
+
+
+    const executionCommand = `python ${filepath}`;
+    const { stdout, stderr } = await execPromise(executionCommand);
+    console.log(stdout);
+
+    return outFilePath;
+  } catch (error) {
+    throw new Error(`Execution error: ${error}`);
+  }
+};
+
+const execPromise = (command) => {
   return new Promise((resolve, reject) => {
-    // Execute the Python file directly using python:
-    exec(`python ${filepath} > ${outPath}`, (error, stdout, stderr) => {
-      error && reject({ error, stderr });
-      stderr && reject(stderr);
-      resolve(stdout);
-      console.log(stdout);
+    exec(command, (error, stdout, stderr) => {
+      if (error) {
+        console.error(error);
+        reject(error);
+        return;
+      }
+      resolve({ stdout, stderr });
     });
   });
 };

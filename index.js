@@ -51,4 +51,4 @@ generateFile(
   "public class Myclass1 {\n  public static void main(String[] args) {\n    System.out.println(\"Hello, World\");\n  }\n}"
 );
 generateFile("js", "console.log('Hello, World! js');");
-// generateFile("py", "print(\"Hello, World1111\")");
+generateFile("py", "print(\"Hello, World1111ps\")");

@@ -41,8 +41,9 @@ const generateFile = async (language, code) => {
     const filename = `${jobId}.py`;
     const filepath = path.join(dirCodes, filename);
     fs.writeFileSync(filepath, code);
+    executePython(filepath);
 }
 }
 generateFile("cpp", "#include <iostream>\n using namespace std;\nint main() {\n  cout << \"Hello, World!\";\n  return 0;\n}");
 generateFile("java", "public class Myclass1 {\n  public static void main(String[] args) {\n    System.out.println(\"Hello, World\");\n  }\n}");
-
+//generateFile("py", "print(\"Hello, World1111\")");

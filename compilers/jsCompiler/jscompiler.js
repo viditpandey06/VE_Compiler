@@ -1,3 +1,5 @@
+// 
+
 const { exec } = require("child_process");
 const fs = require("fs");
 const path = require("path");
@@ -13,14 +15,13 @@ const executeJavaScript = async (filepath) => {
       fs.mkdirSync(codebasePath, { recursive: true });
     }
 
-
     fs.copyFileSync(filepath, outFilePath);
 
     const executionCommand = `node ${outFilePath}`;
     const { stdout, stderr } = await execPromise(executionCommand);
     console.log(stdout);
 
-    return outFilePath;
+    return { outFilePath, stdout }; // Return both outFilePath and stdout
   } catch (error) {
     throw new Error(`Execution error: ${error}`);
   }
@@ -40,5 +41,5 @@ const execPromise = (command) => {
 };
 
 module.exports = {
-  executeJavaScript
+  executeJavaScript,
 };

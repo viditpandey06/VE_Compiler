@@ -25,27 +25,14 @@ npm install ve-compiler
 
 ### Example with Pure Node.js
 
-#### Github Repo
-
 ```javascript
-// Import the compiler module
-const Compiler = require('ve-compiler');
+const { CompileFile } = require('ve-compiler');
 
-// Define code snippets for various languages
-const codeSnippets = {
-    'cpp': '#include <iostream>\nint main() {\nstd::cout << "Hello, World!";\nreturn 0;\n}',
-    'java': 'public class Main {\npublic static void main(String[] args) {\nSystem.out.println("Hello, World!");\n}\n}',
-    'javascript': 'console.log("Hello, World!");',
-    'python': 'print("Hello, World!")',
-    'c': '#include <stdio.h>\nint main() {\nprintf("Hello, World!");\nreturn 0;\n}'
-};
 
-// Compile each code snippet
-for (const language in codeSnippets) {
-    Compiler.compile(language, codeSnippets[language])
-        .then(output => console.log(`Compiled ${language}: ${output}`))
-        .catch(error => console.error(`Compilation failed for ${language}: ${error}`));
-}
+CompileFile(
+    "c",
+    '#include <stdio.h>\n int main() {\n  printf("Hello, World! c ");\n  return 0;\n}'
+  );
 ```
 
 ### Example with React + Node Server + Monaco Editor

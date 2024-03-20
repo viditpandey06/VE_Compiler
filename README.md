@@ -23,6 +23,9 @@ npm install ve-compiler
 
 ## Usage
 
+## Language codes-
+"c" , "cpp" , "js" , "py" , "java"
+
 ### Example with Pure Node.js
 
 ```javascript
@@ -157,4 +160,4 @@ Contributions are welcome! Feel free to open issues or submit pull requests.
 
 ## Important!
 
-While using java compiler we request you to send the class name as - "Main" for it to function properly, we will resolve this issue in the further update.
+While using java compiler we request you to send the class name as - "Main" for it to function properly, we will enhance this feature in further updates.

@@ -51,35 +51,6 @@ const CompileFile = async (language, code) => {
   }
 };
 
-(async () => {
-  try {
-    const cppOutput = await CompileFile(
-      "cpp",
-      '#include <iostream>\n using namespace std;\nint main() {\n  cout << "Hello, World!";\n  return 0;\n}'
-    );
-    console.log("Output of CPP:", cppOutput);
-
-    const javaOutput = await CompileFile(
-      "java",
-      'public class Main {\n  public static void main(String[] args) {\n    System.out.println("Hello, World");\n  }\n}'
-    );
-    console.log("Output of Java:", javaOutput);
-
-    const jsOutput = await CompileFile(
-      "js",
-      "console.log('Hello, World! js');"
-    );
-    console.log("Output of JS:", jsOutput);
-
-    const pyOutput = await CompileFile("py", 'print("Hello, World1111ps")');
-    console.log("Output of Python:", pyOutput);
-
-    const cOutput = await CompileFile(
-      "c",
-      '#include <stdio.h>\n int main() {\n  printf("Hello, World! c ");\n  return 0;\n}'
-    );
-    console.log("Output of C:", cOutput);
-  } catch (error) {
-    console.error("Error:", error);
-  }
-})();
+module.exports = {
+  CompileFile
+};

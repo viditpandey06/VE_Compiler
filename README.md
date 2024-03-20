@@ -155,4 +155,6 @@ app.listen(PORT, () => {
 
 Contributions are welcome! Feel free to open issues or submit pull requests.
 
-\
+## Important!
+
+While using java compiler we request you to send the class name as - "Main" for it to function properly, we will resolve this issue in the further update.
